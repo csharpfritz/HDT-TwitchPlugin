@@ -29,7 +29,7 @@ namespace TwitchPlugin
 			if(!decks.Any())
 				return;
 			var response =
-				decks.Select(d => $"{d.Name.Replace(" ", "_")}:{HssUrl + d.HearthStatsId}").Aggregate((c, n) => c + ", " + n);
+				decks.Select(d => $"{d.Name.Replace(" ", "_")}:{HssUrl + d.HsId}").Aggregate((c, n) => c + ", " + n);
 			Core.Send(response);
 		}
 
@@ -44,7 +44,7 @@ namespace TwitchPlugin
 			if(deck.IsArenaDeck)
 				Core.Send($"Current arena run ({deck.Class}): {deck.WinLossString}, DeckList: {"[currently only supported for constructed decks]"}");
 			else
-				Core.Send($"Currently using \"{deck.Name}\", Winrate: {deck.WinPercentString} ({deck.WinLossString}), Decklist: {HssUrl + deck.HearthStatsId}");
+				Core.Send($"Currently using \"{deck.Name}\", Winrate: {deck.WinPercentString} ({deck.WinLossString}), Decklist: {HssUrl + deck.HsId}");
 		}
 
 		public static void StatsCommand(string arg)
@@ -141,7 +141,7 @@ namespace TwitchPlugin
 				return;
 			}
 			var winRate = Math.Round(100.0 * best.Wins / (best.Wins + best.Losses), 0);
-			Core.Send($"Best deck {timeFrame}: \"{best.DeckObj.Deck.Name}\", Winrate: {winRate}% ({best.Wins}-{best.Losses}), Decklist: {HssUrl + best.DeckObj.Deck.HearthStatsId}");
+			Core.Send($"Best deck {timeFrame}: \"{best.DeckObj.Deck.Name}\", Winrate: {winRate}% ({best.Wins}-{best.Losses}), Decklist: {HssUrl + best.DeckObj.Deck.HsId}");
 		}
 
 		public static void MostPlayedCommand(string arg)
@@ -164,7 +164,7 @@ namespace TwitchPlugin
 			var wins = mostPlayed.Games.Count(g => g.Result == GameResult.Win);
 			var losses = mostPlayed.Games.Count(g => g.Result == GameResult.Loss);
 			var winRate = Math.Round(100.0 * wins / (wins + losses), 0);
-			Core.Send($"Most played deck {timeFrame}: \"{mostPlayed.Deck.Name}\", Winrate: {winRate}% ({wins}-{losses}), Decklist: {HssUrl + mostPlayed.Deck.HearthStatsId}");
+			Core.Send($"Most played deck {timeFrame}: \"{mostPlayed.Deck.Name}\", Winrate: {winRate}% ({wins}-{losses}), Decklist: {HssUrl + mostPlayed.Deck.HsId}");
 		}
 
 		public static Func<GameStats, bool> TimeFrameFilter(string timeFrame)
