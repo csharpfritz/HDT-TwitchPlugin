@@ -24,6 +24,7 @@ namespace TwitchPlugin
 			Commands = new Dictionary<string, ChatCommand>();
 			AddCommand("commands", CommandsCommand, "ChatCommandCommands");
 			AddCommand("deck", DeckCommand, "ChatCommandDeck");
+			AddCommand("deckstring", DeckStringCommand, "ChatCommandDeckString");
 			AddCommand("alldecks", AllDecksCommand, "ChatCommandAllDecks");
 			AddCommand("hdt", HdtCommand, "ChatCommandHdt");
 			AddCommand("stats", () => StatsCommand(Config.Instance.ChatCommandStatsDefault), "ChatCommandStatsGeneral");

@@ -59,6 +59,7 @@ namespace TwitchPlugin
 		public int AutoPostDelay { get; set; }
 		public bool ChatCommandCommands { get; set; }
 		public bool ChatCommandDeck { get; set; }
+		public bool ChatCommandDeckCode { get; set; }
 		public bool ChatCommandAllDecks { get; set; }
 		public bool ChatCommandHdt { get; set; }
 		public bool ChatCommandStatsGeneral { get; set; }

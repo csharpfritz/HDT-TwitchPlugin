@@ -47,6 +47,23 @@ namespace TwitchPlugin
 				Core.Send($"Currently using \"{deck.Name}\", Winrate: {deck.WinPercentString} ({deck.WinLossString}), Decklist: {HssUrl + deck.HsId}");
 		}
 
+		public static void DeckStringCommand()
+		{
+
+			var deck = DeckList.Instance.ActiveDeckVersion;
+			if (deck == null)
+			{
+				Core.Send("No active deck.");
+				return;
+			}
+
+			var thisDeck = HearthDbConverter.ToHearthDbDeck(deck);
+			var deckString = HearthDb.Deckstrings.DeckSerializer.Serialize(thisDeck, false);
+
+			Core.Send($"Here is my deck '{deck.NameAndVersion}': {deckString}");
+
+		}
+
 		public static void StatsCommand(string arg)
 		{
 			if(string.IsNullOrEmpty(arg))
